@@ -1,0 +1,81 @@
+@import url(./style-padrao.css);
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.timer {
+    margin: 3rem;
+    border: 4px solid beige;
+    border-radius: 100%;
+    padding: 15%;
+    font-size: 50px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.timer:hover {
+    transform: scale(1.05);
+    background-color: rgba(245, 245, 220, 0.316);
+    transition: 0.5s;
+}
+
+.infoMenu {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3rem;
+    font-size: 30px;
+    width: 80%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.info p {
+    margin-bottom: 0.5rem;
+}
+
+.info input {
+    background: transparent;
+    color: beige;
+    border: 2px solid beige;
+    border-radius: 20px;
+    padding: 0.5rem;
+    width: 40%;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.info input:hover {
+    background-color: rgba(245, 245, 220, 0.316);
+    transition: 0.5s;
+}
+
+.stop {
+    margin-top: 2rem;
+    border: 2px solid beige;
+    border-radius: 55px;
+    padding: 1.5rem;
+    width: 20%;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.stop:hover {
+    background-color: red;
+    border-color: red;
+    transform: scale(1.05);
+    transition: 0.5s;
+}
