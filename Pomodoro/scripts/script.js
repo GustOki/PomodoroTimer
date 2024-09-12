@@ -15,7 +15,7 @@ const body = document.body;
 const footer = document.querySelector('footer');
 
 // Carregar o áudio do alarme
-const alarmSound = new Audio('alarme.mp3');
+const alarmSound = new Audio('./alarme.mp3');
 alarmSound.volume = 1.0; // Ajustar o volume
 
 // objeto
@@ -68,13 +68,16 @@ const validateInput = () => {
   return workTime && relaxTime ? true : (alert('Por favor, insira os tempos de trabalho e relaxamento!'), false);
 };
 
-// Função para iniciar o cronômetro
+// Função para tocar o som manualmente após interação
 const startTimer = () => {
   if (!isRunning) {
     if (!validateInput()) return;
 
+    alarmSound.play(); // Tocar o áudio ao iniciar para desbloquear o navegador
+    alarmSound.pause(); // Pausar imediatamente após tocar para só tocar nos momentos certos
+
     totalTime = isWorkTime ? timeInputToSeconds(workTimeInput.value) : timeInputToSeconds(relaxTimeInput.value);
-    remainingTime = remainingTime || totalTime; // Continuar do ponto onde parou
+    remainingTime = remainingTime || totalTime; 
     timerDisplay.textContent = formatTime(remainingTime);
     changeBackground();
 
@@ -89,8 +92,8 @@ const updateTimer = () => {
     remainingTime--;
     timerDisplay.textContent = formatTime(remainingTime);
   } else {
-    // Tocar o som do alarme quando o timer terminar
-    alarmSound.play();
+    console.log("Tocando alarme...");
+    alarmSound.play(); // Deve tocar ao fim do timer
 
     clearInterval(timerInterval);
     isRunning = false;
@@ -99,12 +102,12 @@ const updateTimer = () => {
       isWorkTime = false;
       timerDisplay.textContent = 'Relax!';
       remainingTime = null;
-      setTimeout(startTimer, 2000); // Iniciar o cronômetro de relaxamento após 2 segundos
+      setTimeout(startTimer, 2000);
     } else {
       cycleCount++;
       if (cycleCount < maxCycles) {
         isWorkTime = true;
-        setTimeout(startTimer, 2000); // Iniciar o cronômetro de trabalho após 2 segundos
+        setTimeout(startTimer, 2000);
       } else {
         resetBackground();
         timerDisplay.textContent = 'TIMER';
