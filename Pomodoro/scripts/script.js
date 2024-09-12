@@ -15,7 +15,7 @@ const body = document.body;
 const footer = document.querySelector('footer');
 
 // Carregar o áudio do alarme
-const alarmSound = new Audio('./alarme.mp3');
+const alarmSound = new Audio('./sound/alarme.mp3');
 alarmSound.volume = 1.0; // Ajustar o volume
 
 // objeto
