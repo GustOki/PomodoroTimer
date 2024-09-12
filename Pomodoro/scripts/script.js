@@ -14,9 +14,9 @@ const stopDiv = document.getElementById('stop');
 const body = document.body;
 const footer = document.querySelector('footer');
 
-// Carregar o áudio do alarme
+// audio alarme
 const alarmSound = new Audio('./sound/alarme.mp3');
-alarmSound.volume = 1.0; // Ajustar o volume
+alarmSound.volume = 1.0; 
 
 // objeto
 const backgrounds = {
@@ -34,7 +34,7 @@ const backgrounds = {
   },
 };
 
-// Função para formatar o tempo
+// função para formatar o tempo
 const formatTime = (seconds) => {
   const hrs = Math.floor(seconds / 3600).toString().padStart(2, '0');
   const mins = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
@@ -47,34 +47,34 @@ const timeInputToSeconds = (input) => {
   return (hours * 3600) + (minutes * 60);
 };
 
-// Função para mudar o fundo
+// função para mudar o fundo
 const changeBackground = () => {
   const { background, footer: footerColor } = isWorkTime ? backgrounds.work : backgrounds.relax;
   body.style.backgroundColor = background;
   footer.style.backgroundColor = footerColor;
 };
 
-// Resetar o fundo
+// resetar o fundo
 const resetBackground = () => {
   const { background, footer: footerColor } = backgrounds.initial;
   body.style.backgroundColor = background;
   footer.style.backgroundColor = footerColor;
 };
 
-// Validação do input
+// validação do input
 const validateInput = () => {
   const workTime = workTimeInput.value;
   const relaxTime = relaxTimeInput.value;
   return workTime && relaxTime ? true : (alert('Por favor, insira os tempos de trabalho e relaxamento!'), false);
 };
 
-// Função para tocar o som manualmente após interação
+// função para tocar o som manualmente após interação
 const startTimer = () => {
   if (!isRunning) {
     if (!validateInput()) return;
 
-    alarmSound.play(); // Tocar o áudio ao iniciar para desbloquear o navegador
-    alarmSound.pause(); // Pausar imediatamente após tocar para só tocar nos momentos certos
+    alarmSound.play();
+    alarmSound.pause();
 
     totalTime = isWorkTime ? timeInputToSeconds(workTimeInput.value) : timeInputToSeconds(relaxTimeInput.value);
     remainingTime = remainingTime || totalTime; 
@@ -86,14 +86,14 @@ const startTimer = () => {
   }
 };
 
-// Função para atualizar o cronômetro
+// função para atualizar o cronômetro
 const updateTimer = () => {
   if (remainingTime > 0) {
     remainingTime--;
     timerDisplay.textContent = formatTime(remainingTime);
   } else {
     console.log("Tocando alarme...");
-    alarmSound.play(); // Deve tocar ao fim do timer
+    alarmSound.play(); 
 
     clearInterval(timerInterval);
     isRunning = false;
@@ -117,7 +117,7 @@ const updateTimer = () => {
   }
 };
 
-// Função para pausar o cronômetro
+// função para pausar o cronômetro
 const pauseTimer = () => {
   if (isRunning) {
     clearInterval(timerInterval);
@@ -125,7 +125,7 @@ const pauseTimer = () => {
   }
 };
 
-// Função para resetar o cronômetro
+// função para resetar o cronômetro
 const resetTimer = () => {
   clearInterval(timerInterval);
   isRunning = false;
@@ -136,7 +136,7 @@ const resetTimer = () => {
   isWorkTime = true;
 };
 
-// Listeners para controle do timer
+// listeners para controle do timer
 timerDiv.addEventListener('click', () => {
   isRunning ? pauseTimer() : startTimer();
 });
