@@ -1,5 +1,4 @@
 import './App.css';
-import './scripts/timer.js'
 import Header from './components/Header/header';
 import Timer from './components/Timer/timerScreen';
 import InfoMenu from './components/InfoMenu/infoMenu';
