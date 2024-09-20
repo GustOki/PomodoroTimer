@@ -1,0 +1,27 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.info p {
+    margin-bottom: 0.5rem;
+}
+
+.info input {
+    background: transparent;
+    color: beige;
+    border: 2px solid beige;
+    border-radius: 20px;
+    padding: 0.5rem;
+    width: 40%;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.info input:hover {
+    background-color: rgba(245, 245, 220, 0.316);
+    transition: 0.5s;
+}

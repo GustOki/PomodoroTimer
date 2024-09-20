@@ -1,0 +1,20 @@
+footer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--background-footer-inicial);
+    color: var(--cor-texto);
+    font-size: 24px;
+}
+
+footer p{
+    padding-top: 1rem;
+}
+
+#desenv {
+    margin-top: 1rem;
+}
+
+#nomeDesenv {
+    margin-bottom: 2rem;
+}

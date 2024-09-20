@@ -1,0 +1,18 @@
+.stop {
+    margin-top: 2rem;
+    border: 2px solid beige;
+    border-radius: 55px;
+    padding: 1.5rem;
+    width: 20%;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.stop:hover {
+    background-color: red;
+    border-color: red;
+    transform: scale(1.05);
+    transition: 0.5s;
+}
