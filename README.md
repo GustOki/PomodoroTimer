@@ -23,20 +23,20 @@ Siga as instruções abaixo para rodar o projeto localmente:
 ### Passos
 
 1. Clone o repositório:
-   ```bash
-   git clone https://github.com/usuario/PomodoroTimer.git
+   ```
+   bash git clone https://github.com/usuario/PomodoroTimer.git
 
 2. Entre no diretório do projeto:
-    ```cd 
-    PomodoroTimer
+    ``` 
+    cd PomodoroTimer
 
 3. Instale as dependências:
-    ```npm
-    intall
+    ```
+    npm intall
 
 4. Inicie a aplicação:
-    ```npm
-    start
+    ```
+    npm start
 
 5. Inicialize seu navegador e acesse:
     http://localhost:3000
