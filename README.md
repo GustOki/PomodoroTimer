@@ -4,11 +4,11 @@ PomodoroTimer é uma aplicação web desenvolvida em React, baseada na técnica 
 
 ## Funcionalidades
 
-- **Modo WORK (Amarelo):** Temporizador para períodos de trabalho.
-- **Modo RELAX (Verde):** Temporizador para pausas de descanso.
-- Inicie o temporizador clicando no grande círculo central.
+- **Modo WORK (Amarelo):** Temporizador para períodos de atividade.
+- **Modo RELAX (Verde):** Temporizador para intervalos.
+- Inicie o temporizador clicando no grande círculo.
 - Pause o temporizador clicando novamente no círculo.
-- Reinicie o temporizador clicando no botão STOP, sem a necessidade de redefinir os valores inseridos.
+- Reinicie o temporizador clicando no botão STOP, sem precisar redefinir os valores inseridos.
   
 Para o funcionamento correto, defina pelo menos 1 minuto nos campos WORK e RELAX.
 
