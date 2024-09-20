@@ -5,7 +5,6 @@ import InfoMenu from './components/InfoMenu/infoMenu';
 import Stop from './components/Stop/stop';
 import Footer from './components/Footer/footer';
 
-
 function App() {
   return (
     <>
