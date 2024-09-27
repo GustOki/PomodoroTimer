@@ -1,12 +1,17 @@
 import Info from "../Info/info";
-import './infoMenu.css'
+import './infoMenu.css';
 
-const InfoMenu = () => {
-    return (
-        <div className="infoMenu">
-            <Info/>
-        </div> 
-    )
-}
+const InfoMenu = ({ setWorkTime, setRelaxTime, workTime, relaxTime }) => {
+  return (
+    <div className="infoMenu">
+      <Info
+        setWorkTime={setWorkTime}
+        setRelaxTime={setRelaxTime}
+        workTime={workTime}
+        relaxTime={relaxTime}
+      />
+    </div>
+  );
+};
 
 export default InfoMenu;

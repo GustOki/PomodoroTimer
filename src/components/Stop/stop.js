@@ -1,11 +1,11 @@
-import './stop.css'
+import './stop.css';
 
-const Stop = () => {
-    return (
-        <div className="stop" id="stop">
-            <p>Stop</p>
-        </div>
-    )
-}
+const Stop = ({ onClick }) => {
+  return (
+    <div className="stop" id="stop" onClick={onClick}>
+      <p>Stop</p>
+    </div>
+  );
+};
 
 export default Stop;

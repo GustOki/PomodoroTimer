@@ -1,8 +1,21 @@
+.infoMenu {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+    font-size: 30px;
+    width: 80%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
 .info {
     display: flex;
     flex-direction: column;
+    margin-bottom: 1rem;
+    font-size: 30px;
+    width: 80%;
     align-items: center;
-    width: 100%;
+    justify-content: space-evenly;
 }
 
 .info p {
@@ -15,7 +28,8 @@
     border: 2px solid beige;
     border-radius: 20px;
     padding: 0.5rem;
-    width: 40%;
+    width: 50%;
+    font-size: 18px;
     text-align: center;
     cursor: pointer;
     transition: 0.5s;
