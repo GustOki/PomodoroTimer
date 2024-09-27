@@ -2,6 +2,8 @@
 
 PomodoroTimer é uma aplicação web desenvolvida em React, baseada na técnica Pomodoro para gerenciamento de tempo. O projeto foi criado para ajudar na produtividade ao alternar períodos de trabalho e descanso de forma automatizada.
 
+Caso queira acessar o site ativo, acesse o link: https://pomodoro-timer-five-livid.vercel.app 
+
 ## Funcionalidades
 
 - **Modo WORK (Amarelo):** Temporizador para períodos de atividade.
@@ -10,9 +12,9 @@ PomodoroTimer é uma aplicação web desenvolvida em React, baseada na técnica 
 - Pause o temporizador clicando novamente no círculo.
 - Reinicie o temporizador clicando no botão STOP, sem precisar redefinir os valores inseridos.
   
-Para o funcionamento correto, defina pelo menos 1 minuto nos campos WORK e RELAX.
+O timer terá como predefinição 25 minutos de WORK e 5 minutos de RELAX, mas o usuário pode personalizar o tempo que quiser, desde que tenha no mínimo 1 minuto em ambos;
 
-## Como Rodar o Projeto
+## Como rodar o projeto na sua máquina
 
 Siga as instruções abaixo para rodar o projeto localmente:
 
