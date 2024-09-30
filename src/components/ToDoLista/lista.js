@@ -5,46 +5,66 @@ import './lista.css';
 
 const ToDoLista = () => {
   const [todos, setTodos] = useState([]);
+  const [nextId, setNextId] = useState(201); // ID inicial para novos itens (começa após o maior id da API)
 
   // Função para buscar os todos da API
   const fetchTodos = async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=0');
-    const data = await response.json();
-    setTodos(data);
+    try {
+      const response = await fetch('http://localhost:3005/todos');
+      const data = await response.json();
+      setTodos(data);
+    } catch (error) {
+      console.error("Erro ao buscar os todos: ", error);
+    }
   };
-
-  // Função para adicionar um novo todo
+  
   const addTodo = async (title) => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title, completed: false }),
-    });
-    const newTodo = await response.json();
-    setTodos([...todos, newTodo]); // Adiciona o novo todo à lista
+    const newTodo = {
+      title,
+      completed: false,
+    };
+    
+    try {
+      const response = await fetch('http://localhost:3005/todos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTodo), // Envia o novo todo para a API
+      });
+  
+      const data = await response.json(); // Recebe a resposta da API (incluindo o ID gerado)
+  
+      // Atualiza o estado adicionando o novo todo ao final da lista de todos existentes
+      setTodos((prevTodos) => [...prevTodos, data]); 
+    } catch (error) {
+      console.error('Erro ao adicionar um novo todo: ', error);
+    }
   };
-
-  // Função para deletar um todo
+  
+  
   const deleteTodo = async (id) => {
-    await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-      method: 'DELETE',
-    });
-    setTodos(todos.filter(todo => todo.id !== id)); // Atualiza a lista após a exclusão
+    try {
+      await fetch(`http://localhost:3005/todos/${id}`, {
+        method: 'DELETE',
+      });
+      setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
+    } catch (error) {
+      console.error("Erro ao deletar o todo: ", error);
+    }
   };
 
   useEffect(() => {
-    fetchTodos();
+    fetchTodos(); // Busca os todos quando o componente é montado
   }, []);
 
   return (
     <>
-      <ToDoForm onAddTodo={addTodo} />
+      <ToDoForm onAddTodo={addTodo} /> {/* Formulário para adicionar novos todos */}
       <ul>
         {todos.map((todo) => (
-          <ToDoItem key={todo.id} todo={todo} onDelete={deleteTodo} >
-            <p>Atividade:</p> {/* Exemplo de children */}
+          <ToDoItem key={todo.id} todo={todo} onDelete={deleteTodo}>
+            <p>Atividade:</p> {/* Exemplo de children sendo passado */}
           </ToDoItem>
         ))}
       </ul>
@@ -53,4 +73,3 @@ const ToDoLista = () => {
 };
 
 export default ToDoLista;
-

@@ -9,7 +9,7 @@ li {
     background-color: var(--background-inicial);
     width: 50%;
     padding: 20px;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 li p {
