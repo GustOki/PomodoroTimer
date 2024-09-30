@@ -12,4 +12,3 @@ const ToDoItem = ({ todo, onDelete, children }) => {
 };
 
 export default ToDoItem;
-

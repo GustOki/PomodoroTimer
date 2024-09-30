@@ -10,45 +10,46 @@ const ToDoLista = () => {
   // Função para buscar os todos da API
   const fetchTodos = async () => {
     try {
-      const response = await fetch('http://localhost:3005/todos');
+      const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=0');
       const data = await response.json();
       setTodos(data);
     } catch (error) {
       console.error("Erro ao buscar os todos: ", error);
     }
   };
-  
+
+  // Função para adicionar um novo todo com um ID gerado localmente
   const addTodo = async (title) => {
     const newTodo = {
+      id: nextId, // Usamos o próximo ID disponível
       title,
-      completed: false,
+      completed: false
     };
     
+    // Simulando o POST na API
     try {
-      const response = await fetch('http://localhost:3005/todos', {
+      await fetch('https://jsonplaceholder.typicode.com/todos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newTodo), // Envia o novo todo para a API
+        body: JSON.stringify(newTodo),
       });
-  
-      const data = await response.json(); // Recebe a resposta da API (incluindo o ID gerado)
-  
-      // Atualiza o estado adicionando o novo todo ao final da lista de todos existentes
-      setTodos((prevTodos) => [...prevTodos, data]); 
+      
+      setTodos((prevTodos) => [...prevTodos, newTodo]); // Adiciona o novo todo à lista
+      setNextId(nextId + 1); // Incrementa o ID para o próximo item
     } catch (error) {
-      console.error('Erro ao adicionar um novo todo: ', error);
+      console.error("Erro ao adicionar um novo todo: ", error);
     }
   };
-  
-  
+
+  // Função para deletar um todo
   const deleteTodo = async (id) => {
     try {
-      await fetch(`http://localhost:3005/todos/${id}`, {
+      await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
         method: 'DELETE',
       });
-      setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
+      setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id)); // Atualiza a lista após a exclusão
     } catch (error) {
       console.error("Erro ao deletar o todo: ", error);
     }
