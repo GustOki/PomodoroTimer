@@ -3,42 +3,57 @@ import ToDoForm from '../ToDoForm/todoForm';
 import ToDoItem from '../ToDoItem/item';
 import './lista.css';
 
-const ToDoLista = ( {backgroundColor} ) => {
-  const [todos, setTodos] = useState(() => {
-    // Recupera os itens do localStorage quando o componente é montado
-    const savedTodos = localStorage.getItem('todos');
-    return savedTodos ? JSON.parse(savedTodos) : []; // Retorna os itens ou uma lista vazia se não houver
-  });
-  const [nextId, setNextId] = useState(() => {
-    const savedNextId = localStorage.getItem('nextId');
-    return savedNextId ? JSON.parse(savedNextId) : 1; // Retorna o próximo ID salvo ou começa em 1
-  });
+const ToDoLista = ({ backgroundColor }) => {
+  const [todos, setTodos] = useState([]);
 
-  // Função para salvar os todos e o próximo ID no localStorage
-  const saveToLocalStorage = (todos, nextId) => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-    localStorage.setItem('nextId', JSON.stringify(nextId));
+  // Função para buscar todos os itens da API
+  const fetchTodos = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/todos');
+      const data = await response.json();
+      setTodos(data);
+    } catch (error) {
+      console.error('Erro ao buscar os todos:', error);
+    }
   };
 
-  // Função para adicionar um novo todo com um ID gerado localmente
-  const addTodo = (title) => {
+  // useEffect para carregar os dados da API quando o componente monta
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
+  // Função para adicionar um novo todo
+  const addTodo = async (title) => {
     const newTodo = {
-      id: nextId, // Usamos o próximo ID disponível
       title,
-      completed: false
+      completed: false,
     };
 
-    const updatedTodos = [...todos, newTodo]; // Adiciona o novo todo à lista
-    setTodos(updatedTodos); // Atualiza o estado
-    setNextId(nextId + 1); // Incrementa o ID para o próximo item
-    saveToLocalStorage(updatedTodos, nextId + 1); // Salva os dados no localStorage
+    try {
+      const response = await fetch('http://localhost:3001/todos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTodo),
+      });
+      const addedTodo = await response.json();
+      setTodos([...todos, addedTodo]);
+    } catch (error) {
+      console.error('Erro ao adicionar o todo:', error);
+    }
   };
 
   // Função para deletar um todo
-  const deleteTodo = (id) => {
-    const updatedTodos = todos.filter(todo => todo.id !== id); // Filtra a lista
-    setTodos(updatedTodos); // Atualiza a lista no estado
-    saveToLocalStorage(updatedTodos, nextId); // Salva os dados atualizados no localStorage
+  const deleteTodo = async (id) => {
+    try {
+      await fetch(`http://localhost:3001/todos/${id}`, {
+        method: 'DELETE',
+      });
+      setTodos(todos.filter((todo) => todo.id !== id));
+    } catch (error) {
+      console.error('Erro ao deletar o todo:', error);
+    }
   };
 
   return (
