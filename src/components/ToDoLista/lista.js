@@ -4,60 +4,42 @@ import ToDoItem from '../ToDoItem/item';
 import './lista.css';
 
 const ToDoLista = () => {
-  const [todos, setTodos] = useState([]);
-  const [nextId, setNextId] = useState(201); // ID inicial para novos itens (começa após o maior id da API)
+  const [todos, setTodos] = useState(() => {
+    // Recupera os itens do localStorage quando o componente é montado
+    const savedTodos = localStorage.getItem('todos');
+    return savedTodos ? JSON.parse(savedTodos) : []; // Retorna os itens ou uma lista vazia se não houver
+  });
+  const [nextId, setNextId] = useState(() => {
+    const savedNextId = localStorage.getItem('nextId');
+    return savedNextId ? JSON.parse(savedNextId) : 1; // Retorna o próximo ID salvo ou começa em 1
+  });
 
-  // Função para buscar os todos da API
-  const fetchTodos = async () => {
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=0');
-      const data = await response.json();
-      setTodos(data);
-    } catch (error) {
-      console.error("Erro ao buscar os todos: ", error);
-    }
+  // Função para salvar os todos e o próximo ID no localStorage
+  const saveToLocalStorage = (todos, nextId) => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem('nextId', JSON.stringify(nextId));
   };
 
   // Função para adicionar um novo todo com um ID gerado localmente
-  const addTodo = async (title) => {
+  const addTodo = (title) => {
     const newTodo = {
       id: nextId, // Usamos o próximo ID disponível
       title,
       completed: false
     };
-    
-    // Simulando o POST na API
-    try {
-      await fetch('https://jsonplaceholder.typicode.com/todos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newTodo),
-      });
-      
-      setTodos((prevTodos) => [...prevTodos, newTodo]); // Adiciona o novo todo à lista
-      setNextId(nextId + 1); // Incrementa o ID para o próximo item
-    } catch (error) {
-      console.error("Erro ao adicionar um novo todo: ", error);
-    }
+
+    const updatedTodos = [...todos, newTodo]; // Adiciona o novo todo à lista
+    setTodos(updatedTodos); // Atualiza o estado
+    setNextId(nextId + 1); // Incrementa o ID para o próximo item
+    saveToLocalStorage(updatedTodos, nextId + 1); // Salva os dados no localStorage
   };
 
   // Função para deletar um todo
-  const deleteTodo = async (id) => {
-    try {
-      await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-        method: 'DELETE',
-      });
-      setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id)); // Atualiza a lista após a exclusão
-    } catch (error) {
-      console.error("Erro ao deletar o todo: ", error);
-    }
+  const deleteTodo = (id) => {
+    const updatedTodos = todos.filter(todo => todo.id !== id); // Filtra a lista
+    setTodos(updatedTodos); // Atualiza a lista no estado
+    saveToLocalStorage(updatedTodos, nextId); // Salva os dados atualizados no localStorage
   };
-
-  useEffect(() => {
-    fetchTodos(); // Busca os todos quando o componente é montado
-  }, []);
 
   return (
     <>
