@@ -8,6 +8,7 @@ import { playAlarmSound, prepareAlarmSound } from './scripts/alarm';
 import { changeBackground, resetBackground } from './scripts/background';
 import { formatTime, timeInputToSeconds } from './scripts/formatTime';
 import Info from './components/Info/info';
+import ToDoLista from './components/ToDoLista/lista';
 
 function App() {
   const [isRunning, setIsRunning] = useState(false);
@@ -90,6 +91,13 @@ function App() {
           setRelaxTime={setRelaxTime} 
         />
         <Stop onClick={resetTimer} />
+      </section>
+      <section>
+        <div className="todolist">
+          <h1>To-Do List</h1>
+          {/* Componente TodoList que gerencia toda a lógica */}
+          <ToDoLista />
+        </div>
       </section>
       <Footer backgroundColor = {isRunning 
           ? (isWorkTime ? 'var(--background-footer-work)' : 'var(--background-footer-relax)') 

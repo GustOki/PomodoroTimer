@@ -18,7 +18,7 @@ const backgrounds = {
 
 const changeBackground = (isWorkTime) => {
   const { background, footer: footerColor } = isWorkTime ? backgrounds.work : backgrounds.relax;
-  
+
   // Verifica se body e footer existem antes de aplicar o estilo
   if (body) {
     body.style.backgroundColor = background;
@@ -26,6 +26,7 @@ const changeBackground = (isWorkTime) => {
 
   if (footer) {
     footer.style.backgroundColor = footerColor;
+  
   } else {
     console.error("Elemento 'footer' não encontrado no DOM");
   }
@@ -33,7 +34,7 @@ const changeBackground = (isWorkTime) => {
 
 const resetBackground = () => {
   const { background, footer: footerColor } = backgrounds.initial;
-  
+
   // Verifica se body e footer existem antes de aplicar o estilo
   if (body) {
     body.style.backgroundColor = background;
@@ -41,6 +42,7 @@ const resetBackground = () => {
 
   if (footer) {
     footer.style.backgroundColor = footerColor;
+  
   } else {
     console.error("Elemento 'footer' não encontrado no DOM");
   }
