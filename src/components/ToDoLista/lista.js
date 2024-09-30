@@ -3,7 +3,7 @@ import ToDoForm from '../ToDoForm/todoForm';
 import ToDoItem from '../ToDoItem/item';
 import './lista.css';
 
-const ToDoLista = () => {
+const ToDoLista = ( {backgroundColor} ) => {
   const [todos, setTodos] = useState(() => {
     // Recupera os itens do localStorage quando o componente é montado
     const savedTodos = localStorage.getItem('todos');
@@ -42,7 +42,8 @@ const ToDoLista = () => {
   };
 
   return (
-    <>
+    <div className='todolist' style={{ backgroundColor }}>
+      <h1>To-Do List</h1>
       <ToDoForm onAddTodo={addTodo} /> {/* Formulário para adicionar novos todos */}
       <ul>
         {todos.map((todo) => (
@@ -51,7 +52,7 @@ const ToDoLista = () => {
           </ToDoItem>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

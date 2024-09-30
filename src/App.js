@@ -91,17 +91,16 @@ function App() {
           setRelaxTime={setRelaxTime} 
         />
         <Stop onClick={resetTimer} />
-
-        <div className="todolist">
-          <h1>To-Do List</h1>
-          {/* Componente TodoList que gerencia toda a lógica */}
-          <ToDoLista />
-        </div>
+        
+        <ToDoLista backgroundColor = {isRunning 
+          ? (isWorkTime ? 'var(--background-todo-work)' : 'var(--background-todo-relax)') 
+          : 'var(--background-todo-inicial)'
+        }/>
       </section>
 
       <Footer backgroundColor = {isRunning 
           ? (isWorkTime ? 'var(--background-footer-work)' : 'var(--background-footer-relax)') 
-          : 'var(--background-footer-inicial' 
+          : 'var(--background-footer-inicial)' 
         } 
       />
     </>
