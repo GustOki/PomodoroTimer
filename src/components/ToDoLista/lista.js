@@ -3,16 +3,13 @@ import ToDoForm from '../ToDoForm/todoForm';
 import ToDoItem from '../ToDoItem/item';
 import './lista.css';
 
-// URL base da API do jsonplaceholder
-const API_URL = 'https://jsonplaceholder.typicode.com/todos';
-
 const ToDoLista = ({ backgroundColor }) => {
   const [todos, setTodos] = useState([]);
-  
-  // Função para buscar os todos da API
+
+  // Função para buscar todos os itens da API
   const fetchTodos = async () => {
     try {
-      const response = await fetch(`${API_URL}?_limit=3`); // Limitar para 3 itens
+      const response = await fetch('http://localhost:3001/todos');
       const data = await response.json();
       setTodos(data);
     } catch (error) {
@@ -20,28 +17,28 @@ const ToDoLista = ({ backgroundColor }) => {
     }
   };
 
+  // useEffect para carregar os dados da API quando o componente monta
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
   // Função para adicionar um novo todo
   const addTodo = async (title) => {
-    try {
-      const newTodo = {
-        id: Date.now(), // Gerar ID único localmente
-        title,
-        completed: false
-      };
+    const newTodo = {
+      title,
+      completed: false,
+    };
 
-      // Envia o novo todo para a API (opcional, já que a fake API não salva de verdade)
-      const response = await fetch(API_URL, {
+    try {
+      const response = await fetch('http://localhost:3001/todos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newTodo),
       });
-
-      const createdTodo = await response.json();
-
-      // Adiciona o novo todo ao estado local com o ID gerado
-      setTodos((prevTodos) => [...prevTodos, { ...createdTodo, id: newTodo.id }]);
+      const addedTodo = await response.json();
+      setTodos([...todos, addedTodo]);
     } catch (error) {
       console.error('Erro ao adicionar o todo:', error);
     }
@@ -50,21 +47,14 @@ const ToDoLista = ({ backgroundColor }) => {
   // Função para deletar um todo
   const deleteTodo = async (id) => {
     try {
-      await fetch(`${API_URL}/${id}`, {
+      await fetch(`http://localhost:3001/todos/${id}`, {
         method: 'DELETE',
       });
-
-      // Atualiza o estado local removendo o todo
-      setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
+      setTodos(todos.filter((todo) => todo.id !== id));
     } catch (error) {
       console.error('Erro ao deletar o todo:', error);
     }
   };
-
-  // Busca os todos ao carregar o componente
-  useEffect(() => {
-    fetchTodos();
-  }, []);
 
   return (
     <div className='todolist' style={{ backgroundColor }}>
