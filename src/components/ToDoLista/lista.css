@@ -1,0 +1,26 @@
+@import url('../../App.css');
+
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90rem;
+}
+
+.todolist {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 70%;
+    background-color: var(--background-todo-inicial);
+    border-radius: 20px;
+    margin-top: 2rem;
+  }
+  
+  .todolist h1 {
+    margin: 2rem 0;
+    font-size: 30px;
+    font-weight: bold;
+  }

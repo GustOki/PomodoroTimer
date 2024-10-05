@@ -43,6 +43,15 @@ Siga as instruções abaixo para rodar o projeto localmente:
 5. Inicialize seu navegador e acesse:
     http://localhost:3000
 
+6. Certifique-se de que o json-server esteja instalado globalmente. Se não estiver, instale-o com o seguinte comando:
+    ```
+    npm install -g json-server
+
+7. No diretório do projeto, inicie o json-server com o db.json que já está incluído no repositório:
+    ```
+    json-server --watch db.json --port 3001
+
+
 ### ATENÇÃO!
 
 Certifique-se de que você tenha o Node.js e o npm instalados em sua máquina para executar o projeto corretamente.

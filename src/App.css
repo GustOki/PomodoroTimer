@@ -2,9 +2,12 @@
   --background-inicial: rgb(0, 170, 255);
   --background-work: rgb(219, 190, 0);
   --background-relax: rgb(0, 203, 105);
-  --background-footer-inicial: rgb(0, 127, 190);
+  --background-footer-inicial: rgb(0, 109, 164);
+  --background-todo-inicial: rgb(0, 137, 206);
+  --background-todo-work: rgb(200, 173, 0);
+  --background-todo-relax: rgb(0, 176, 91);
   --background-footer-work: rgb(189, 164, 0);
-  --background-footer-relax: rgb(0, 189, 97);
+  --background-footer-relax: rgb(0, 166, 86);
   --fonte-texto: 'SUSE';
   --cor-texto: beige;
 }
