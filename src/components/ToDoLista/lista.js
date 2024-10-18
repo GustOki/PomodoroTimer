@@ -6,54 +6,30 @@ import './lista.css';
 const ToDoLista = ({ backgroundColor }) => {
   const [todos, setTodos] = useState([]);
 
-  // Função para buscar todos os itens da API
-  const fetchTodos = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/todos');
-      const data = await response.json();
-      setTodos(data);
-    } catch (error) {
-      console.error('Erro ao buscar os todos:', error);
-    }
-  };
-
-  // useEffect para carregar os dados da API quando o componente monta
+  // Carrega os todos do localStorage ao montar o componente
   useEffect(() => {
-    fetchTodos();
+    const storedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+    setTodos(storedTodos);
   }, []);
 
+  // Salva os todos no localStorage sempre que eles forem atualizados
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
   // Função para adicionar um novo todo
-  const addTodo = async (title) => {
+  const addTodo = (title) => {
     const newTodo = {
+      id: Date.now(), // Gera um ID único baseado na data/hora atual
       title,
       completed: false,
     };
-
-    try {
-      const response = await fetch('http://localhost:3001/todos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newTodo),
-      });
-      const addedTodo = await response.json();
-      setTodos([...todos, addedTodo]);
-    } catch (error) {
-      console.error('Erro ao adicionar o todo:', error);
-    }
+    setTodos([...todos, newTodo]);
   };
 
   // Função para deletar um todo
-  const deleteTodo = async (id) => {
-    try {
-      await fetch(`http://localhost:3001/todos/${id}`, {
-        method: 'DELETE',
-      });
-      setTodos(todos.filter((todo) => todo.id !== id));
-    } catch (error) {
-      console.error('Erro ao deletar o todo:', error);
-    }
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
